@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>তোমার জন্য একটি চমক</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600&family=Dancing+Script:wght@600;700&display=swap');
+
+:root{
+  --bg-deep: #2a0a16;
+  --bg-plum: #170410;
+  --card: #fdf1ee;
+  --card-soft: #f7e3de;
+  --gold: #cf9d3f;
+  --gold-soft: #e8c877;
+  --rose: #d9536f;
+  --rose-deep: #a8324a;
+  --ink: #3a1420;
+  --cream: #f7e8dc;
+  --muted: #7a4356;
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  margin:0; padding:0; height:100%;
+  font-family:'Hind Siliguri', sans-serif;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(217,83,111,0.18), transparent 55%),
+    radial-gradient(ellipse at 85% 85%, rgba(207,157,63,0.14), transparent 50%),
+    linear-gradient(160deg, var(--bg-deep), var(--bg-plum) 70%);
+  color: var(--cream);
+  overflow-x:hidden;
+}
+
+.stage{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px 18px;
+  position:relative;
+}
+
+.floaters{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+.floaters span{
+  position:absolute; bottom:-40px; font-size:18px; opacity:0.25;
+  animation: rise linear infinite;
+  color: var(--rose);
+}
+@keyframes rise{
+  to{ transform: translateY(-110vh) rotate(20deg); opacity:0; }
+}
+
+.card{
+  position:relative; z-index:1;
+  width:100%; max-width:430px;
+  background: var(--card);
+  border-radius: 22px;
+  padding: 36px 26px 30px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(207,157,63,0.25);
+  text-align:center;
+  color: var(--ink);
+}
+
+.eyebrow{
+  font-family:'Baloo Da 2', sans-serif;
+  font-weight:600; font-size:13px;
+  letter-spacing:0.08em;
+  color: var(--rose-deep);
+  margin-bottom: 6px;
+}
+
+h1{
+  font-family:'Baloo Da 2', sans-serif;
+  font-size: 24px;
+  font-weight:700;
+  margin: 0 0 6px;
+  color: var(--rose-deep);
+}
+
+.sub{
+  font-size:14px;
+  color: var(--muted);
+  margin-bottom: 22px;
+  line-height:1.6;
+}
+
+/* ---- gift box (modern) ---- */
+.box-wrap{ display:flex; justify-content:center; margin: 6px 0 28px; }
+.giftbox{ width:180px; cursor:pointer; user-select:none; transition: transform .25s ease; }
+.giftbox:hover{ transform: translateY(-5px) scale(1.03); }
+.giftbox:active{ transform: scale(0.97); }
+.box-svg-wrap{ position:relative; height:170px; }
+.lid{ transition: transform .6s cubic-bezier(.34,1.56,.64,1); transform-origin: 50% 100%; }
+.opening .lid{ transform: translateY(-20px) rotate(-16deg); }
+.shadow-ellipse{ transition: transform .5s ease, opacity .5s ease; transform-origin:center; }
+.opening .shadow-ellipse{ transform: scale(0.85); opacity:0.6; }
+.sparkle{ opacity:0; transform-origin:center; }
+.opening .sparkle{ animation: twinkle 1.4s ease forwards; }
+.opening .sparkle:nth-child(1){ animation-delay:.05s; }
+.opening .sparkle:nth-child(2){ animation-delay:.25s; }
+.opening .sparkle:nth-child(3){ animation-delay:.15s; }
+.opening .sparkle:nth-child(4){ animation-delay:.35s; }
+@keyframes twinkle{
+  0%{ opacity:0; transform:scale(0.3) rotate(0deg); }
+  40%{ opacity:1; transform:scale(1.15) rotate(20deg); }
+  70%{ opacity:0.8; }
+  100%{ opacity:0; transform:scale(0.7) rotate(35deg) translateY(-14px); }
+}
+.hint{ font-family:'Baloo Da 2', sans-serif; font-weight:600; font-size:14px; color: var(--rose-deep); margin-top:4px; }
+.burst{ position:absolute; inset:0; pointer-events:none; }
+.burst span{ position:absolute; left:50%; top:38%; font-size:16px; opacity:0; color: var(--rose); }
+.opening .burst span{ animation: pop .9s ease forwards; }
+.opening .burst span:nth-child(1){ --tx:-65px; --ty:-75px; animation-delay:.08s;}
+.opening .burst span:nth-child(2){ --tx:65px;  --ty:-85px; animation-delay:.14s;}
+.opening .burst span:nth-child(3){ --tx:-24px; --ty:-105px; animation-delay:.2s;}
+.opening .burst span:nth-child(4){ --tx:34px;  --ty:-64px; animation-delay:.26s;}
+.opening .burst span:nth-child(5){ --tx:-75px; --ty:-42px; animation-delay:.17s;}
+.opening .burst span:nth-child(6){ --tx:85px;  --ty:-32px; animation-delay:.23s;}
+@keyframes pop{
+  0%{ opacity:0; transform:translate(0,0) scale(0.4); }
+  30%{ opacity:1; }
+  100%{ opacity:0; transform:translate(var(--tx),var(--ty)) scale(1); }
+}
+
+/* ---- modern calendar ---- */
+.cal{
+  background:#fffaf7;
+  border-radius:18px;
+  padding:16px 14px 18px;
+  border:1px solid #f0d9d0;
+  margin-bottom:16px;
+}
+.cal-head{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:14px;
+}
+.cal-nav{
+  width:32px; height:32px; border-radius:10px;
+  border:none; background:#fbe6e0; color:var(--rose-deep);
+  font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition: background .15s ease, transform .15s ease;
+}
+.cal-nav:hover{ background:var(--rose); color:#fff; transform:scale(1.06); }
+.cal-title{
+  font-family:'Baloo Da 2', sans-serif; font-weight:700; font-size:16px; color:var(--rose-deep);
+  cursor:pointer; padding:4px 10px; border-radius:8px; transition: background .15s ease;
+}
+.cal-title:hover{ background:#fbe6e0; }
+.cal-weekdays{
+  display:grid; grid-template-columns:repeat(7,1fr);
+  margin-bottom:4px;
+}
+.cal-weekdays span{
+  font-size:11px; font-weight:600; color:var(--muted); text-align:center;
+}
+.cal-grid{
+  display:grid; grid-template-columns:repeat(7,1fr); gap:4px;
+}
+.cal-grid.year-mode{ grid-template-columns:repeat(4,1fr); gap:8px; }
+.cal-day{
+  aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+  border-radius:50%; font-size:13.5px; cursor:pointer; color:var(--ink);
+  transition: background .15s ease, color .15s ease, transform .1s ease;
+  position:relative;
+}
+.cal-day:hover{ background:#fbe6e0; }
+.cal-day.empty{ cursor:default; }
+.cal-day.empty:hover{ background:none; }
+.cal-day.today::after{
+  content:''; position:absolute; bottom:3px; width:4px; height:4px; border-radius:50%; background:var(--gold);
+}
+.cal-day.selected{
+  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  color:#fff8f3; font-weight:700;
+  box-shadow: 0 6px 14px rgba(168,50,74,0.35);
+  transform: scale(1.05);
+}
+.cal-day.past{ color:#d9c2bd; cursor:not-allowed; }
+.cal-day.past:hover{ background:none; }
+
+.year-cell{
+  border-radius:12px; aspect-ratio:auto; height:44px; font-size:14px; font-weight:600;
+}
+.year-cell.current-year{ color: var(--rose-deep); }
+
+/* ---- modern time picker (chips, grid layout) ---- */
+.time-picker{
+  background:#fffaf7; border-radius:18px; padding:16px 14px 14px;
+  border:1px solid #f0d9d0; text-align:left;
+}
+.time-label{ font-size:13px; font-weight:600; color:var(--rose-deep); margin-bottom:10px; }
+.chip-row{ display:grid; gap:7px; }
+.chip-row.hours{ grid-template-columns:repeat(6,1fr); }
+.chip-row.minutes{ grid-template-columns:repeat(4,1fr); }
+.chip-row.ampm{ grid-template-columns:repeat(2,1fr); }
+.chip{
+  padding:8px 4px; border-radius:10px; text-align:center;
+  background:#fbe6e0; color:var(--ink); font-size:13px; font-weight:600;
+  cursor:pointer; transition: background .15s ease, color .15s ease, transform .1s ease;
+  border:1.5px solid transparent;
+}
+.chip:hover{ transform:translateY(-1px); }
+.chip.selected{
+  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  color:#fff8f3; border-color: var(--rose-deep);
+}
+.chip-group{ margin-bottom:12px; }
+.chip-group:last-child{ margin-bottom:0; }
+.time-preview{
+  margin-top:12px; text-align:center;
+  font-family:'Baloo Da 2', sans-serif; font-weight:700; font-size:20px; color:var(--rose-deep);
+}
+
+.btn{
+  font-family:'Baloo Da 2', sans-serif; font-weight:700; font-size:16px; color:#fff8f3;
+  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  border:none; border-radius:14px; padding:13px 20px; width:100%;
+  cursor:pointer; margin-top:18px;
+  box-shadow: 0 10px 22px rgba(168,50,74,0.35);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.btn:hover{ transform: translateY(-2px); box-shadow: 0 14px 26px rgba(168,50,74,0.42); }
+.btn:disabled{ opacity:0.4; cursor:not-allowed; transform:none; }
+.btn-ghost{
+  background: transparent; color: var(--rose-deep);
+  border: 1.5px solid var(--rose-deep); box-shadow:none;
+}
+.btn-ghost:hover{ transform:none; background: rgba(217,83,111,0.08); }
+
+/* ---- sending screen ---- */
+.envelope{ width:88px; height:60px; margin: 6px auto 20px; position:relative; }
+.envelope svg{ width:100%; height:100%; display:block; }
+.fly{ animation: fly 1.6s ease forwards; }
+@keyframes fly{
+  0%{ transform: translateY(0) scale(1); opacity:1; }
+  70%{ transform: translateY(-18px) scale(0.9); opacity:1; }
+  100%{ transform: translateY(-46px) scale(0.5); opacity:0; }
+}
+.dots span{
+  display:inline-block; width:6px; height:6px; border-radius:50%;
+  background: var(--rose-deep); margin:0 3px; animation: blink 1.2s infinite ease-in-out;
+}
+.dots span:nth-child(2){ animation-delay:.2s; }
+.dots span:nth-child(3){ animation-delay:.4s; }
+@keyframes blink{ 0%,80%,100%{opacity:.25;} 40%{opacity:1;} }
+
+/* ---- final screen ---- */
+.heart-big{ font-size:54px; color: var(--rose); animation: beat 1.3s ease-in-out infinite; margin-bottom:6px; }
+@keyframes beat{ 0%,100%{ transform:scale(1); } 25%{ transform:scale(1.12); } 40%{ transform:scale(0.98); } }
+.script{ font-family:'Dancing Script', cursive; font-size:40px; color: var(--rose-deep); margin:4px 0 12px; }
+.love-line{ font-family:'Baloo Da 2', sans-serif; font-size:21px; font-weight:700; color: var(--rose-deep); margin-bottom:18px; line-height:1.5; }
+.chosen{
+  background: var(--card-soft); border-radius:14px; padding:12px 16px; margin-bottom:20px;
+  font-size:14px; color: var(--ink); font-weight:600; border:1px dashed var(--gold);
+}
+
+.hidden{ display:none !important; }
+.fade-in{ animation: fadeIn .5s ease both; }
+@keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+@media (prefers-reduced-motion: reduce){ *{ animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="floaters" id="floaters"></div>
+
+<div class="stage">
+
+  <!-- SCREEN 1: BOX -->
+  <div class="card" id="screen-box">
+    <div class="eyebrow">তোমার জন্য</div>
+    <h1>একটি ছোট্ট চমক</h1>
+    <div class="sub">নিচের বাক্সটা তোমার জন্য অপেক্ষা করছে।</div>
+
+    <div class="box-wrap">
+      <div class="giftbox" id="giftbox" onclick="openBox()">
+        <div class="box-svg-wrap">
+          <div class="burst">
+            <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+          </div>
+          <svg viewBox="0 0 180 170" style="position:relative; width:100%; height:100%;">
+            <defs>
+              <linearGradient id="boxGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e0637f"/>
+                <stop offset="1" stop-color="#a8324a"/>
+              </linearGradient>
+              <linearGradient id="lidGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ec7690"/>
+                <stop offset="1" stop-color="#c74263"/>
+              </linearGradient>
+              <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#f3d68a"/>
+                <stop offset="1" stop-color="#cf9d3f"/>
+              </linearGradient>
+            </defs>
+
+            <!-- soft shadow -->
+            <ellipse class="shadow-ellipse" cx="90" cy="150" rx="58" ry="10" fill="#3a1420" opacity="0.18"/>
+
+            <!-- sparkles -->
+            <g class="sparkle" fill="var(--gold)">
+              <path d="M40 60 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z"/>
+            </g>
+            <g class="sparkle" fill="var(--rose)">
+              <path d="M148 50 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 z"/>
+            </g>
+            <g class="sparkle" fill="var(--gold-soft)">
+              <circle cx="30" cy="95" r="3.5"/>
+            </g>
+            <g class="sparkle" fill="var(--rose)">
+              <circle cx="155" cy="100" r="3"/>
+            </g>
+
+            <!-- box body -->
+            <rect x="28" y="82" width="124" height="62" rx="14" fill="url(#boxGrad)"/>
+            <rect x="78" y="82" width="24" height="62" fill="url(#ribbonGrad)" opacity="0.95"/>
+
+            <!-- lid group (animates open) -->
+            <g class="lid">
+              <rect x="20" y="60" width="140" height="28" rx="12" fill="url(#lidGrad)"/>
+              <rect x="78" y="60" width="24" height="28" fill="url(#ribbonGrad)"/>
+              <!-- bow -->
+              <g>
+                <path d="M90 60 C90 60 60 52 58 34 C57 22 72 20 82 30 C88 37 90 50 90 60 Z" fill="url(#ribbonGrad)"/>
+                <path d="M90 60 C90 60 120 52 122 34 C123 22 108 20 98 30 C92 37 90 50 90 60 Z" fill="url(#ribbonGrad)"/>
+                <circle cx="90" cy="58" r="10" fill="#f3d68a" stroke="#cf9d3f" stroke-width="2"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="hint">👉 বাক্সটি খুলো</div>
+  </div>
+
+  <!-- SCREEN 2: DATE/TIME FORM (MODERN) -->
+  <div class="card hidden" id="screen-form">
+    <div class="eyebrow">একটু অপেক্ষা করো</div>
+    <h1>কবে দেখা করতে চাও?</h1>
+    <div class="sub">তারিখ আর সময়টা বেছে নাও।</div>
+
+    <div class="cal">
+      <div class="cal-head">
+        <button class="cal-nav" onclick="navPrev()">‹</button>
+        <div class="cal-title" id="calTitle" onclick="toggleYearMode()"></div>
+        <button class="cal-nav" onclick="navNext()">›</button>
+      </div>
+      <div class="cal-weekdays" id="calWeekdays">
+        <span>র</span><span>সো</span><span>ম</span><span>বু</span><span>বৃ</span><span>শু</span><span>শ</span>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <div class="time-picker">
+      <div class="time-label">সময়</div>
+      <div class="chip-group">
+        <div class="chip-row hours" id="hourRow"></div>
+      </div>
+      <div class="chip-group">
+        <div class="chip-row minutes" id="minuteRow"></div>
+      </div>
+      <div class="chip-group">
+        <div class="chip-row ampm" id="ampmRow"></div>
+      </div>
+      <div class="time-preview" id="timePreview">সময় বেছে নাও</div>
+    </div>
+
+    <button class="btn" id="nextBtn" onclick="sendMail()" disabled>পরের ধাপ →</button>
+  </div>
+
+  <!-- SCREEN 3: SENDING -->
+  <div class="card hidden" id="screen-sending">
+    <div class="envelope fly">
+      <svg viewBox="0 0 100 70">
+        <rect x="2" y="2" width="96" height="66" rx="8" fill="#fdf1ee" stroke="#cf9d3f" stroke-width="2"/>
+        <path d="M4 6 L50 42 L96 6" fill="none" stroke="#d9536f" stroke-width="3"/>
+      </svg>
+    </div>
+    <h1>মেইল পাঠানো হচ্ছে…</h1>
+    <div class="sub">তোমার বয়ফ্রেন্ডের কাছে খবর যাচ্ছে <span class="dots"><span></span><span></span><span></span></span></div>
+  </div>
+
+  <!-- SCREEN 4: MAIL SENT -->
+  <div class="card hidden" id="screen-sent">
+    <div class="eyebrow">সুখবর</div>
+    <h1>মেইল পৌঁছে গেছে! 💌</h1>
+    <div class="sub">তোমার ভালোবাসার মানুষের কাছে মেইল চলে গেছে।<br>এখন আসল কথাটা তাকে বলার পালা…</div>
+    <button class="btn" onclick="showFinal()">দেখো কী লেখা আছে →</button>
+  </div>
+
+  <!-- SCREEN 5: FINAL LOVE MESSAGE -->
+  <div class="card hidden" id="screen-final">
+    <div class="heart-big">♥</div>
+    <div class="script">I love you</div>
+    <div class="love-line">তোমার সাথে দেখা করতে ইচ্ছা করছে আমার</div>
+    <div class="chosen" id="chosenLine"></div>
+    <button class="btn btn-ghost" onclick="resetAll()">আবার থেকে শুরু করো</button>
+  </div>
+
+</div>
+
+<script>
+// ambient floating hearts
+const floaters = document.getElementById('floaters');
+const symbols = ['♥','♡'];
+for(let i=0;i<14;i++){
+  const s = document.createElement('span');
+  s.textContent = symbols[Math.random()>0.5?0:1];
+  s.style.left = Math.random()*100+'vw';
+  s.style.fontSize = (14+Math.random()*16)+'px';
+  s.style.animationDuration = (8+Math.random()*10)+'s';
+  s.style.animationDelay = (Math.random()*8)+'s';
+  floaters.appendChild(s);
+}
+
+function show(id){
+  ['screen-box','screen-form','screen-sending','screen-sent','screen-final'].forEach(s=>{
+    document.getElementById(s).classList.add('hidden');
+  });
+  const el = document.getElementById(id);
+  el.classList.remove('hidden');
+  el.classList.remove('fade-in');
+  void el.offsetWidth;
+  el.classList.add('fade-in');
+}
+
+function openBox(){
+  const box = document.getElementById('giftbox');
+  box.classList.add('opening');
+  setTimeout(()=> { renderCalendar(); renderTimePicker(); show('screen-form'); }, 700);
+}
+
+/* ---------- MODERN CALENDAR (with year picker) ---------- */
+const banglaMonths = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+const banglaDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+function toBn(n){ return String(n).split('').map(d=> banglaDigits[d] !== undefined ? banglaDigits[d] : d).join(''); }
+
+let viewYear, viewMonth, selectedDate = null; // selectedDate: {y,m,d}
+let calMode = 'days'; // 'days' | 'years'
+let yearBlockStart = 0;
+const today = new Date();
+
+function initCalendarState(){
+  viewYear = today.getFullYear();
+  viewMonth = today.getMonth();
+  calMode = 'days';
+}
+initCalendarState();
+
+function toggleYearMode(){
+  if(calMode === 'days'){
+    yearBlockStart = viewYear - 5;
+    calMode = 'years';
+  } else {
+    calMode = 'days';
+  }
+  renderCalendar();
+}
+
+function navPrev(){
+  if(calMode === 'years'){ yearBlockStart -= 12; renderCalendar(); return; }
+  viewMonth--;
+  if(viewMonth < 0){ viewMonth = 11; viewYear--; }
+  renderCalendar();
+}
+function navNext(){
+  if(calMode === 'years'){ yearBlockStart += 12; renderCalendar(); return; }
+  viewMonth++;
+  if(viewMonth > 11){ viewMonth = 0; viewYear++; }
+  renderCalendar();
+}
+
+function renderCalendar(){
+  const title = document.getElementById('calTitle');
+  const weekdays = document.getElementById('calWeekdays');
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  if(calMode === 'years'){
+    title.textContent = toBn(yearBlockStart) + ' – ' + toBn(yearBlockStart + 11);
+    weekdays.style.display = 'none';
+    grid.classList.add('year-mode');
+    for(let y = yearBlockStart; y <= yearBlockStart + 11; y++){
+      const cell = document.createElement('div');
+      cell.className = 'cal-day year-cell';
+      if(y === today.getFullYear()) cell.classList.add('current-year');
+      if(y === viewYear) cell.classList.add('selected');
+      cell.textContent = toBn(y);
+      cell.onclick = () => { viewYear = y; calMode = 'days'; renderCalendar(); };
+      grid.appendChild(cell);
+    }
+    updateNextBtn();
+    return;
+  }
+
+  weekdays.style.display = 'grid';
+  grid.classList.remove('year-mode');
+  title.textContent = banglaMonths[viewMonth] + ' ' + toBn(viewYear);
+
+  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+  const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+  const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  for(let i=0;i<firstDay;i++){
+    const empty = document.createElement('div');
+    empty.className = 'cal-day empty';
+    grid.appendChild(empty);
+  }
+
+  for(let d=1; d<=daysInMonth; d++){
+    const cell = document.createElement('div');
+    cell.className = 'cal-day';
+    cell.textContent = toBn(d);
+    const thisDate = new Date(viewYear, viewMonth, d);
+
+    if(thisDate.getTime() === todayMid.getTime()){ cell.classList.add('today'); }
+    if(thisDate < todayMid){
+      cell.classList.add('past');
+    } else {
+      cell.onclick = () => selectDate(viewYear, viewMonth, d);
+    }
+    if(selectedDate && selectedDate.y===viewYear && selectedDate.m===viewMonth && selectedDate.d===d){
+      cell.classList.add('selected');
+    }
+    grid.appendChild(cell);
+  }
+  updateNextBtn();
+}
+
+function selectDate(y,m,d){
+  selectedDate = {y,m,d};
+  renderCalendar();
+}
+
+/* ---------- MODERN TIME PICKER ---------- */
+let selHour = null, selMinute = null, selAmpm = null;
+
+function renderTimePicker(){
+  const hourRow = document.getElementById('hourRow');
+  const minuteRow = document.getElementById('minuteRow');
+  const ampmRow = document.getElementById('ampmRow');
+  hourRow.innerHTML = ''; minuteRow.innerHTML = ''; ampmRow.innerHTML = '';
+
+  for(let h=1; h<=12; h++){
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.textContent = toBn(h);
+    chip.onclick = () => { selHour = h; renderTimePicker(); };
+    if(selHour === h) chip.classList.add('selected');
+    hourRow.appendChild(chip);
+  }
+  [0,15,30,45].forEach(m => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.textContent = toBn(String(m).padStart(2,'0'));
+    chip.onclick = () => { selMinute = m; renderTimePicker(); };
+    if(selMinute === m) chip.classList.add('selected');
+    minuteRow.appendChild(chip);
+  });
+  ['AM','PM'].forEach(p => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.textContent = p === 'AM' ? 'সকাল' : 'বিকাল';
+    chip.onclick = () => { selAmpm = p; renderTimePicker(); };
+    if(selAmpm === p) chip.classList.add('selected');
+    ampmRow.appendChild(chip);
+  });
+
+  const preview = document.getElementById('timePreview');
+  if(selHour!==null && selMinute!==null && selAmpm!==null){
+    preview.textContent = toBn(selHour) + ':' + toBn(String(selMinute).padStart(2,'0')) + ' ' + (selAmpm==='AM'?'সকাল':'বিকাল');
+  } else {
+    preview.textContent = 'সময় বেছে নাও';
+  }
+  updateNextBtn();
+}
+
+function updateNextBtn(){
+  const btn = document.getElementById('nextBtn');
+  if(btn) btn.disabled = !(selectedDate && selHour!==null && selMinute!==null && selAmpm!==null);
+}
+
+function sendMail(){
+  if(!selectedDate || selHour===null || selMinute===null || selAmpm===null) return;
+  window._chosen = {
+    date: banglaMonths[selectedDate.m] + ' ' + toBn(selectedDate.d) + ', ' + toBn(selectedDate.y),
+    time: toBn(selHour) + ':' + toBn(String(selMinute).padStart(2,'0')) + ' ' + (selAmpm==='AM'?'সকাল':'বিকাল')
+  };
+  show('screen-sending');
+  setTimeout(()=> show('screen-sent'), 1800);
+}
+
+function showFinal(){
+  const c = window._chosen;
+  document.getElementById('chosenLine').textContent = c ? ('📅 ' + c.date + ' • ' + c.time) : '';
+  show('screen-final');
+}
+
+function resetAll(){
+  document.getElementById('giftbox').classList.remove('opening');
+  selectedDate = null; selHour = null; selMinute = null; selAmpm = null;
+  initCalendarState();
+  show('screen-box');
+}
+</script>
+
+</body>
+</html>
